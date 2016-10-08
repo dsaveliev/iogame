@@ -1,0 +1,9 @@
+div#minimapcontainer {
+
+}
+canvas#minimap {
+ position : absolute;
+}
+canvas#minimapobjects {
+ position : absolute;
+}
