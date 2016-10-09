@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"math/rand"
 	"net/http"
@@ -32,6 +33,11 @@ func serverHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func mapHandler(w http.ResponseWriter, r *http.Request) {
+	json, err := json.Marshal(world.Map)
+	CheckErr(err, "Marshall")
+
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Write(json)
 }
 
 func main() {

@@ -22,8 +22,8 @@ type Player struct {
 func BuildPlayer(conn *Connection) *Player {
 	return &Player{
 		Id:    uuid.NewV4().String(),
-		X:     5.0,
-		Y:     5.0,
+		X:     2.0,
+		Y:     2.0,
 		Rot:   0.0,
 		State: PLAYER_STATE_VALID,
 		Conn:  conn,

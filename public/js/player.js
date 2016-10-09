@@ -1,5 +1,5 @@
 var players = {};
-var player = createPlayer(5, 5, 0);
+var player = createPlayer(2, 2, 0);
 
 function createPlayer(x, y, rot) {
   return {

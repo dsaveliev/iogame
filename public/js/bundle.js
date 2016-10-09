@@ -85,7 +85,7 @@ function drawMiniMap() {
 }
 
 var players = {};
-var player = createPlayer(5, 5, 0);
+var player = createPlayer(2, 2, 0);
 
 function createPlayer(x, y, rot) {
   return {
@@ -330,26 +330,41 @@ ws.onerror = function(evt) {
 var $ = function(id) { return document.getElementById(id); };
 var dc = function(tag) { return document.createElement(tag); };
 
-var map = [
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-];
+// var map = [
+//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+// 	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+// ];
 
+var map = [];
 var mapWidth = 0;
 var mapHeight = 0;
 var miniMapScale = 32;
 
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
 function init() {
-	mapWidth = map[0].length;
-	mapHeight = map.length;
+  json = JSON.parse(httpGet("http://localhost:3000/map"));
+
+  map = json.layout;
+  mapWidth = json.width;
+  mapHeight = json.height;
+
+	//mapWidth = map[0].length;
+	//mapHeight = map.length;
 
 	bindKeys();
 	drawMiniMap();
