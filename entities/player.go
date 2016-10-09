@@ -34,7 +34,7 @@ func (p *Player) IsAlive() bool {
 	return p.Conn.IsAlive() && p.State == PLAYER_STATE_VALID
 }
 
-func (p *Player) Listen() {
+func (p *Player) Listen(m *Map) {
 	defer func() {
 		if r := recover(); r != nil {
 			Log("Close connection due previous error")
@@ -49,7 +49,7 @@ func (p *Player) Listen() {
 		}
 		ps := &PlayerState{}
 		p.Conn.Read(ps)
-		if !IsBlocking(ps.X, ps.Y) {
+		if !m.IsBlocking(ps.X, ps.Y) {
 			p.X = ps.X
 			p.Y = ps.Y
 			p.Rot = ps.Rot

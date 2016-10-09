@@ -16,7 +16,7 @@ var map = [
 
 var mapWidth = 0;
 var mapHeight = 0;
-var miniMapScale = 16;
+var miniMapScale = 32;
 
 function init() {
 	mapWidth = map[0].length;

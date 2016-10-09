@@ -24,11 +24,14 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
-func server(w http.ResponseWriter, r *http.Request) {
+func serverHandler(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	CheckErr(err, "Upgrade")
 
 	world.CreatePlayer(conn)
+}
+
+func mapHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
@@ -39,6 +42,7 @@ func main() {
 	go world.Run()
 
 	flag.Parse()
-	http.HandleFunc("/server", server)
+	http.HandleFunc("/server", serverHandler)
+	http.HandleFunc("/map", mapHandler)
 	http.ListenAndServe(*addr, nil)
 }

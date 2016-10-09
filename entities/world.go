@@ -13,10 +13,13 @@ const TICKS_LIMIT = 2400
 
 type World struct {
 	Players []*Player
+	Map     *Map
 }
 
 func BuildWorld() *World {
-	return &World{}
+	return &World{
+		Map: BuildMap(),
+	}
 }
 
 func (w *World) CreatePlayer(wc *websocket.Conn) {
@@ -24,7 +27,7 @@ func (w *World) CreatePlayer(wc *websocket.Conn) {
 	p := BuildPlayer(c)
 	w.Players = append(w.Players, p)
 
-	go p.Listen()
+	go p.Listen(w.Map)
 }
 
 func (w *World) DeletePlayer(i int) {
