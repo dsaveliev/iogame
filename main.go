@@ -48,6 +48,10 @@ func main() {
 	go world.Run()
 
 	flag.Parse()
+
+	staticHandler := http.FileServer(http.Dir("public"))
+
+	http.Handle("/", staticHandler)
 	http.HandleFunc("/server", serverHandler)
 	http.HandleFunc("/map", mapHandler)
 	http.ListenAndServe(*addr, nil)
