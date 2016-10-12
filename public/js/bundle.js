@@ -330,42 +330,27 @@ ws.onerror = function(evt) {
 var $ = function(id) { return document.getElementById(id); };
 var dc = function(tag) { return document.createElement(tag); };
 
-// var map = [
-//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-// 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-// 	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-// ];
-
 var map = [];
 var mapWidth = 0;
 var mapHeight = 0;
 var miniMapScale = 32;
 
-function httpGet(theUrl)
+function loadMap()
 {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
-}
+  var url = "http://localhost:3000/map";
 
-function init() {
-  json = JSON.parse(httpGet("http://localhost:3000/map"));
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", url, false ); // false for synchronous request
+  xmlHttp.send( null );
 
+  var json = JSON.parse(xmlHttp.responseText);
   map = json.layout;
   mapWidth = json.width;
   mapHeight = json.height;
+}
 
-	//mapWidth = map[0].length;
-	//mapHeight = map.length;
-
+function init() {
+  loadMap();
 	bindKeys();
 	drawMiniMap();
 	gameCycle();
