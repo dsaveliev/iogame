@@ -13,7 +13,6 @@ gulp.task('minify', function() {
   gulp.src(['./public/js/bindings.js',
             './public/js/minimap.js',
             './public/js/player.js',
-            './public/js/raycasting.js',
             './public/js/websocket.js',
             './public/js/main.js'])
     .pipe(concat('bundle.js'))

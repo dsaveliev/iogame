@@ -30,6 +30,5 @@ function init() {
 function gameCycle() {
 	movePlayer();
 	updateMiniMap();
-  castRays(player);
   requestAnimationFrame(gameCycle)
 }
