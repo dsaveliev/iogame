@@ -1,6 +1,8 @@
 package entities
 
 import (
+	"fmt"
+
 	"github.com/satori/go.uuid"
 
 	. "iogame/utils"
@@ -49,6 +51,9 @@ func (p *Player) Listen(m *Map) {
 		}
 		ps := &PlayerState{}
 		p.Conn.Read(ps)
+
+		fmt.Println(ps.X, " ", ps.Y)
+
 		if !m.IsBlocking(ps.X, ps.Y) {
 			p.X = ps.X
 			p.Y = ps.Y
