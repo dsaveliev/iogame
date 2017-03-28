@@ -50,8 +50,10 @@ func main() {
 	flag.Parse()
 
 	staticHandler := http.FileServer(http.Dir("public"))
+	vendorHandler := http.FileServer(http.Dir("node_modules"))
 
 	http.Handle("/", staticHandler)
+	http.Handle("/vendor/", http.StripPrefix("/vendor/", vendorHandler))
 	http.HandleFunc("/server", serverHandler)
 	http.HandleFunc("/map", mapHandler)
 	http.ListenAndServe(*addr, nil)

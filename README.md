@@ -1,7 +1,7 @@
 IOGame
 ======
 
-Фронтэнд - голый JS, сборка Gulp'ом. Бэкэнд - Golang.
+Фронтэнд - голый JS, сборка Rollup'ом. Бэкэнд - Golang.
 
 При создании сервера руководстсвовался этим циклом статей:
 - [Мультиплеер в быстрых играх (части I, II)](https://habrahabr.ru/post/302394/)
@@ -25,16 +25,7 @@ IOGame
 
 1. Устанавливаем npm
 2. [Устанавливаем golang](https://golang.org/doc/install)
-3. Ставим модули гульпа:
-
-	```bash
-	npm install --global gulp-cli
-	npm install --save-dev gulp
-	npm install --save-dev gulp-concat
-	npm install --save-dev gulp-uglify
-	npm install --save-dev gulp-order
-	```
-
+3. Делаем `npm install`
 4. Ставим модули golang'а:
 
 	```bash
@@ -45,14 +36,16 @@ IOGame
 5. Запускаем сервер
 
 	```bash
-	./run.sh
-	[13:53:33] Using gulpfile ~/Work/Golang/src/iogame/gulpfile.js
-	[13:53:33] Starting 'minify'...
-	[13:53:33] Finished 'minify' after 14 ms
-	[13:53:33] Starting 'default'...
-	[13:53:33] Finished 'default' after 48 μs
-	2017/02/23 13:53:34 [INFO] Start server on localhost:3000
+    npm run start
+
+    2017/03/28 21:07:10 [INFO] Start server on localhost:3000
 	```
+
+6. Запускаем сборку фронта
+    
+    ```bash
+    npm run watch
+    ```
 
 6. [Идем смотреть, что получилось](http://localhost:3000)
 
